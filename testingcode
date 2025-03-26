@@ -1,0 +1,20 @@
+Function AddPayment(payment_id, tenant_id, amount, payment_date, payment_method, payment_status, reference_number)
+    
+    // Validate if tenant exists
+    If tenant_id is NOT in Tenants Database
+        Return "Error: Tenant does not exist!"
+    
+    // Validate payment amount
+    If amount ≤ 0
+        Return "Error: Invalid payment amount!"
+    
+    // Create a new payment record
+    new_payment ← Payment(payment_id, tenant_id, amount, payment_date, payment_method, payment_status, reference_number)
+    
+    // Add payment to the database
+    status ← Insert new_payment into Payments Table
+    
+    If status is True
+        Return "Payment added successfully!"
+    Else
+        Return "Error: Unable to add payment!"
